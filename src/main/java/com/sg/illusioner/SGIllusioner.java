@@ -35,11 +35,11 @@ public class SGIllusioner implements ModInitializer {
 				return;
 			}
 			EvokerEntity evoker = (EvokerEntity) entity;
-			NbtElement check = ((IEntityDataSaver)evoker).getPersistentData().get("illusioner_spawn");
+			NbtElement check = ((IEntityDataSaver)evoker).getSGIllusionerPersistentData().get("illusioner_spawn");
 			if(check != null){
 				return;
 			}
-			((IEntityDataSaver)evoker).getPersistentData().putString("illusioner_spawn", "checked");
+			((IEntityDataSaver)evoker).getSGIllusionerPersistentData().putString("illusioner_spawn", "checked");
 			boolean willSpawn = r.nextInt(100) <= spawnRatio;
 			if (!willSpawn) {
 				return;

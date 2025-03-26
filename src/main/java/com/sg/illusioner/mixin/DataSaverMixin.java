@@ -16,7 +16,7 @@ public abstract class DataSaverMixin implements IEntityDataSaver {
     private NbtCompound persistentData;
 
     @Override
-    public NbtCompound getPersistentData(){
+    public NbtCompound getSGIllusionerPersistentData(){
         if(this.persistentData == null){
             this.persistentData = new NbtCompound();
         }
@@ -26,14 +26,14 @@ public abstract class DataSaverMixin implements IEntityDataSaver {
     @Inject(method = "writeNbt", at = @At("HEAD"))
     protected void injectWriteMethod(NbtCompound nbt, CallbackInfoReturnable info){
         if(persistentData != null){
-            nbt.put("sg.persistent_data", persistentData);
+            nbt.put("sg_illusioner_persistent_data", persistentData);
         }
     }
 
     @Inject(method = "readNbt", at = @At("HEAD"))
     protected void injectReadMethod(NbtCompound nbt, CallbackInfo info){
-        if(nbt.contains("sg.persistent_data", 10)){
-            persistentData = nbt.getCompound("sg.persistent_data");
+        if(nbt.contains("sg_illusioner_persistent_data")){
+            persistentData = nbt.getCompound("sg_illusioner_persistent_data").get();
         }
     }
 }
